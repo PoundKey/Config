@@ -1,3 +1,4 @@
+```
 [user]
 	name = C.T Xue
 	email = xuecnt@hotmail.com
@@ -48,3 +49,4 @@
 	default = matching
 [credential]
 	helper = osxkeychain
+```
