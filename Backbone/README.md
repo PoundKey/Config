@@ -1,4 +1,4 @@
-```javascript
+```js
 $(this.el) => $('#myViewElement') if this.el refers to <div id="myViewElement"></div>
 // This is the return of document.getElementById
 this.$el   => a cached reference
