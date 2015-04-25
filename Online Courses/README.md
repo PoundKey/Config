@@ -9,6 +9,8 @@
 
 [Stanford Courses Online: I Love This Site!](http://online.stanford.edu/courses)
 
+[Learning How to Learn: Powerful mental tools to help you master tough subjects](https://www.coursera.org/learn/learning-how-to-learn/outline?module=21MMy)
+
 
 ## Lecture Slides
 [CMU 15-451 (Algorithms) Lecture Notes](http://www.cs.cmu.edu/~avrim/451f11/lectures/)
