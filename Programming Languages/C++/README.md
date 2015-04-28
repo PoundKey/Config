@@ -376,11 +376,148 @@ class Person {
         string address;
 
     void printInfo() {
-        cout << "Name: " << this.name << endl;
-        cout << "Age: " << this.age << endl;
-        cout << "Address: " << this.address << endl;
+        cout << "Name: " << this->name << endl;
+        cout << "Age: " << this->age << endl;
+        cout << "Address: " << this->address << endl;
     }
+
+    Person() {
+        name = "Steve Nash";
+        age = 21;
+        address = "Vancouver Canada";        
+    }
+
+    Person(string name, int age, string address) {
+        this->name = name;
+        this->age = age;
+        this->address = address;        
+    }  
+
+    ~Person() {
+        //destructor
+    }  
 }
 ```
+
+- A __destructor__ is another special kind of class member function that is executed when an object of that class is destroyed. They are the counterpart to constructors. When a variable goes out of scope, or a dynamically allocated variable is explicitly deleted using the delete keyword, the class destructor is called (if it exists) to help clean up the class before it is removed from memory. 
+
+- In a __composition__, the complex object “owns” all of the subobjects it is composed of. When a composition is destroyed, all of the subobjects are destroyed as well. 
+- An __aggregation__ is a specific type of composition where no ownership between the complex object and the subobjects is implied. When an aggregate is destroyed, the subobjects are not destroyed.
+
+- Compositions:
+    - Typically use normal member variables
+    - Can use pointer values if the composition class automatically handles allocation/deallocation
+    - Responsible for creation/destruction of subclasses
+- Aggregations:
+    - Typically use pointer variables that point to an object that lives outside the scope of the aggregate class
+    - Can use reference values that point to an object that lives outside the scope of the aggregate class
+    - Not responsible for creating/destroying subclasses
+
+### Header & Body File 
+```cpp
+// Date.h
+#ifndef DATE_H
+#define DATE_H
+ 
+class Date {
+private:
+    int m_nMonth;
+    int m_nDay;
+    int m_nYear;
+ 
+    Date() { } // private default constructor
+ 
+public:
+    Date(int nMonth, int nDay, int nYear);
+ 
+    void SetDate(int nMonth, int nDay, int nYear);
+ 
+    int GetMonth() { return m_nMonth; }
+    int GetDay()  { return m_nDay; }
+    int GetYear() { return m_nYear; }
+};
+ 
+#endif
+
+
+// Date.cpp
+
+#include "Date.h"
+ 
+// Date constructor
+Date::Date(int nMonth, int nDay, int nYear) {
+    SetDate(nMonth, nDay, nYear);
+}
+ 
+// Date member function
+void Date::SetDate(int nMonth, int nDay, int nYear) {
+    m_nMonth = nMonth;
+    m_nDay = nDay;
+    m_nYear = nYear;
+}
+```
+
+### Friend functions
+- A friend function is a function that can access the private members of a class as though it were a member of that class. In all other regards, the friend function is just like a normal function.
+- Overloading the operators uses a lot friend functions
+
+### Shallow vs. Deep Copying
+- A shallow copy means that C++ copies each member of the class individually using the assignment operator. When classes are simple (eg. do not contain any dynamically allocated memory), this works very well.
+-  A deep copy duplicates the object or variable being pointed to so that the destination (the object being assigned to) receives it’s own local copy. This way, the destination can do whatever it wants to it’s local copy and the object that was copied from will not be affected. 
+- Doing deep copies requires that we write our own copy constructors and overloaded assignment operators.
+
+### Constructor Initialization Lists
+- The initialization list is inserted after the constructor parameters, begins with a colon (:), and then lists each variable to initialize along with the value for that variable separated by a comma. Note that we no longer need to do the explicit assignments in the constructor body, since the initialization list replaces that functionality.
+- It's the only way to initialize const data members. (e.g., const int x;)
+
+```cpp
+class Something {
+private:
+    int nValue;
+    double dValue;
+    int *pnValue;
+ 
+public:
+    Something() : nValue(0), dValue(0.0), pnValue(0) {
+    }
+};
+```
+
+### Container Classes
+- A container class is a class designed to hold and organize multiple instances of another class.
+- Value container -> composition, Reference container -> aggregation
+
+### Inheritance
+```cpp
+class A {
+public:
+    int x;
+protected:
+    int y;
+private:
+    int z;
+};
+
+class B : public A {
+    // x is public
+    // y is protected
+    // z is not accessible from B
+};
+
+class C : protected A {
+    // x is protected
+    // y is protected
+    // z is not accessible from C
+};
+
+class D : private A {
+    // x is private
+    // y is private
+    // z is not accessible from D
+};
+// The default type of the inheritance is private. 
+// Including methods, everything will turn into private
+```
+
 
 ### Template
