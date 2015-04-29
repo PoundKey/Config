@@ -488,6 +488,8 @@ public:
 - Value container -> composition, Reference container -> aggregation
 
 ### Inheritance
+- Everytime instantiate a derived class, all its ancestor classes' constructors will be called as well
+
 ```cpp
 class A {
 public:
@@ -519,5 +521,203 @@ class D : private A {
 // Including methods, everything will turn into private
 ```
 
+- A class is made abstract by declaring at least one of its functions as pure virtual function. A pure virtual function is specified by placing "= 0" in its declaration as follows:
+
+```cpp
+class Box {
+   public:
+      // pure virtual function
+      virtual double getVolume() = 0;
+   private:
+      double length;      // Length of a box
+      double breadth;     // Breadth of a box
+      double height;      // Height of a box
+};
+
+- An __interface__ class is a class that has no members variables, and where all of the functions are pure virtual.
+- Interfaces can be passed as function parameters (a good practice)
+
+```cpp
+class IErrorLog {
+    virtual bool OpenLog(const char *strFilename) = 0;
+    virtual bool CloseLog() = 0;
+    virtual bool WriteError(const char *strErrorMessage) = 0;
+};
+
+// Interface as parameters class: FileErrorLog: public IErrorLog
+
+double MySqrt(double dValue, FileErrorLog &cLog) {
+    //doSomething
+}
+
+double MySqrt(double dValue, IErrorLog &cLog) {
+    //doSomething
+}
+```
+
+```
+
+### Input and Output (I/O)
+//TODO
 
 ### Template
+- In C++, function templates are functions that serve as a pattern for creating other similar functions. 
+- The basic idea behind function templates is to create a function without having to specify the exact type(s) of some or all of the variables. 
+- Instead, we define the function using placeholder types, called template type parameters. Once we have created a function using these placeholder types, we have effectively created a “function stencil”.
+- Function Template VS Class Template
+
+```cpp
+//Function Template:
+
+int max(int X, int Y) {
+    return (X > Y) ? X : Y;
+}
+
+template <typename Type> // this is the template parameter declaration
+Type max(Type X, Type Y) {
+    return (X > Y) ? X : Y;
+}
+
+template <typename T1, typename T2> // declare multiple types inside of < >
+// template function here
+
+
+
+// Class Template:
+using namespace std;
+
+template <class T>
+class Stack { 
+  private: 
+    vector<T> elems;     // elements 
+
+  public: 
+    void push(T const&);  // push element 
+    void pop();               // pop element 
+    T top() const;            // return top element 
+    bool empty() const{       // return true if empty.
+        return elems.empty(); 
+    } 
+}; 
+
+template <class T>
+void Stack<T>::push (T const& elem) { 
+    // append copy of passed element 
+    elems.push_back(elem);    
+} 
+
+template <class T>
+void Stack<T>::pop () { 
+    if (elems.empty()) { 
+        throw out_of_range("Stack<>::pop(): empty stack"); 
+    }
+    // remove last element 
+    elems.pop_back();         
+} 
+
+template <class T>
+T Stack<T>::top () const { 
+    if (elems.empty()) { 
+        throw out_of_range("Stack<>::top(): empty stack"); 
+    }
+    // return copy of last element 
+    return elems.back();      
+} 
+
+int main() { 
+    try { 
+        Stack<int>    intStack;       // stack of ints 
+        Stack<string> stringStack;    // stack of strings 
+
+        // manipulate int stack 
+        intStack.push(7); 
+        cout << intStack.top() <<endl; 
+
+        // manipulate string stack 
+        stringStack.push("hello"); 
+        cout << stringStack.top() << std::endl; 
+        stringStack.pop(); 
+        stringStack.pop(); 
+    } 
+    catch (exception const& ex) { 
+        cerr << "Exception: " << ex.what() <<endl; 
+        return -1;
+    } 
+} 
+
+```
+
+- A __template expression parameter__ is a parameter that does not substitute for a type, but is instead replaced by a value. 
+- When instantiating a template class for a given type, the compiler stencils out a copy of each templated member function, and replaces the template type parameters with the actual types used in the variable declaration. 
+- Partial template specialization: Specify class/method definitions for specific data type (e.g., double)
+
+```cpp 
+template <class T>
+class Base {
+    private:
+        T count;
+    public:
+        Base(T c): count(c) {
+            cout << "Base Created with TC" << endl;
+        }
+};
+
+template <>
+class Base<float> {
+    private:
+        float count;
+    public:     
+        Base<float>(float c):count(c) {
+            cout << "Specialized Template: Base Created with Float" << endl;
+        } 
+};
+
+
+int main(int argc, char *argv[]) {
+    Base<int> base1(21);        //Base Created with TC
+    Base<float> base2(20.21);   //Specialized Template: Base Created with Float
+    
+}
+
+//type as a pointer 
+template <class T>
+class Storage<T*> {
+    // this is specialization of Storage that works with pointer types
+}
+
+```
+
+### Exception Handling
+```cpp
+try {
+    throw DATA_TYPE
+} catch(DATA_TYPE e) {
+    //doSomething
+}
+
+// catch all-exceptions hanlder
+try {
+    // ...
+} catch (...) {
+    // ...
+}
+
+```
+
+### Standard Template Library (STL)
+- A __vector__ is a dynamic array capable of growing as needed to contain its elements. 
+- A __set__ is a container that stores unique elements, with duplicate elements disallowed. The elements are sorted according to their values
+- A __map__ (also called an associative array) is a set where each element is a pair, called a key/value pair. The key is used for sorting and indexing the data, and must be unique. The value is the actual data.
+- A __stack__ is a container where elements operate in a LIFO (Last In, First Out) context, where elements are inserted (pushed) and removed (popped) from the end of the container. Stacks default to using deque as their default sequence container (which seems odd, since vector seems like a more natural fit), but can use vector or list as well.
+- A __queue__ is a container where elements operate in a FIFO (First In, First Out) context, where elements are inserted (pushed) to the back of the container and removed (popped) from the front. Queues default to using deque, but can also use list.
+- A __priority queue__ is a type of queue where the elements are kept sorted (via operator<). When elements are pushed, the element is sorted in the queue. Removing an element from the front returns the highest priority item in the priority queue.
+- Others: <algorithm>, etc
+
+### C++ 11
+- auto, decltype, nullptr, and enum classes
+- override, final, default, and delete
+- Delegating Constructors
+- Initializer Lists & Uniform Initialization
+- Range-based for statements
+
+[Reference: learncpp.com](http://www.learncpp.com)
