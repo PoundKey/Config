@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SingleViewApp_DatePicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="GsT-D9-e4D">
+                                <rect key="frame" x="0.0" y="42" width="600" height="216"/>
+                                <animations/>
+                                <date key="date" timeIntervalSinceReferenceDate="470908001.39523798">
+                                    <!--2015-12-04 07:46:41 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzc-gP-Ilg">
+                                <rect key="frame" x="217" y="305" width="166" height="56"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Jdz-in-stf"/>
+                                    <constraint firstAttribute="width" constant="166" id="NlO-Vh-knR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="What was the day?"/>
+                                <connections>
+                                    <action selector="computeDay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bpQ-bw-FHG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GsT-D9-e4D" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="5x4-Li-5cm"/>
+                            <constraint firstItem="Wzc-gP-Ilg" firstAttribute="top" secondItem="GsT-D9-e4D" secondAttribute="bottom" constant="47" id="J3d-WU-O0B"/>
+                            <constraint firstItem="GsT-D9-e4D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NpD-Fb-Xwr"/>
+                            <constraint firstItem="GsT-D9-e4D" firstAttribute="centerX" secondItem="Wzc-gP-Ilg" secondAttribute="centerX" id="Vre-yi-Tgg"/>
+                            <constraint firstAttribute="trailing" secondItem="GsT-D9-e4D" secondAttribute="trailing" id="fAp-lq-Wcl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="GsT-D9-e4D" id="9o0-Hv-WOU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="506" y="429"/>
+        </scene>
+    </scenes>
+</document>
