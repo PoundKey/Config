@@ -721,3 +721,21 @@ try {
 - Range-based for statements
 
 [Reference: learncpp.com](http://www.learncpp.com)
+
+## C++ Extra Notes
+```cpp
+// Allocate 6 bytes in the stack and store "hello" in them
+char stack[] = "hello";
+
+// Allocate pointer on the stack and point it to a static, read-only buffer
+// containing "hello"
+const char *heap = "hello";
+
+// Malloc 5 bytes (which isn't enough to hold "hello" due to the NUL byte)
+char *heap_string_malloc = malloc(5);
+
+// Reset heap_string_malloc to point to a static buffer; memory leak!
+heap_string_malloc = "hello";
+```
+
+### TODO: C++ Forward Declaration vs Include
