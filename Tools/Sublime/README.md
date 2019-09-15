@@ -19,17 +19,7 @@
 	"font_size": 16,
 	"ignored_packages":
 	[
-		"SublimeLinter",
-		"Vintage",
-		"SublimeOnSaveBuild",
-		"PHP",
-		"SFTP",
-		"JavaScript & NodeJS Snippets",
-		"Node Completions",
-		"Rails Developer Snippets",
-		"AngularJS Snippets",
-		"Bootstrap 3 Snippets",
-		"CasperJS"
+		"Vintage"
 	],
 	"remember_open_files": true,
 	"soda_folder_icons": true,
